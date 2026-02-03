@@ -1,0 +1,327 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+:root {
+    --bg-primary: #FFFFFF;
+    --text-primary: #000000;
+    --text-accent: #4A90E2;
+    --progress-bg: #E0E0E0;
+    --progress-fill: #4A90E2;
+    --border-color: #E0E0E0;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+/* Header with Menu Button */
+#header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 200;
+    background-color: var(--bg-primary);
+    padding: env(safe-area-inset-top, 15px) 20px 15px 20px;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#menu-button {
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: var(--text-primary);
+    cursor: pointer;
+    padding: 5px 10px;
+}
+
+#header-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-primary);
+    flex: 1;
+    text-align: center;
+}
+
+/* Chapter Menu Overlay */
+#chapter-menu {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 80%;
+    max-width: 350px;
+    height: 100vh;
+    background-color: var(--bg-primary);
+    z-index: 300;
+    transition: left 0.3s ease;
+    overflow-y: auto;
+    padding: env(safe-area-inset-top, 60px) 0 env(safe-area-inset-bottom, 20px) 0;
+    border-right: 1px solid var(--border-color);
+    box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+}
+
+#chapter-menu.open {
+    left: 0;
+}
+
+#chapter-menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 250;
+    display: none;
+}
+
+#chapter-menu-overlay.open {
+    display: block;
+}
+
+.chapter-item {
+    padding: 20px 25px;
+    border-bottom: 1px solid var(--border-color);
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.chapter-item:active {
+    background-color: #F5F5F5;
+}
+
+.chapter-item-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 5px;
+}
+
+.chapter-item-subtitle {
+    font-size: 13px;
+    color: #666;
+}
+
+.chapter-item.active {
+    background-color: #F0F8FF;
+}
+
+/* Progress Bar Container */
+#progress-container {
+    position: fixed;
+    top: calc(env(safe-area-inset-top, 15px) + 60px);
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background-color: var(--bg-primary);
+    padding: 10px 20px 15px 20px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+#chapter-info {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: var(--text-accent);
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+#progress-bar-wrapper {
+    width: 100%;
+    height: 4px;
+    background-color: var(--progress-bg);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+#progress-bar {
+    height: 100%;
+    background-color: var(--progress-fill);
+    width: 0%;
+    transition: width 0.3s ease;
+}
+
+/* Main App Container */
+#app-container {
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+    padding-top: calc(env(safe-area-inset-top, 15px) + 145px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Navigation Zones */
+.nav-zone {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: 30%;
+    z-index: 50;
+    cursor: pointer;
+}
+
+#nav-left {
+    left: 0;
+}
+
+#nav-right {
+    right: 0;
+}
+
+/* Lesson Container */
+#lesson-container {
+    max-width: 900px;
+    width: 100%;
+    padding: 0 30px calc(env(safe-area-inset-bottom, 20px) + 20px) 30px;
+    text-align: center;
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: calc(100vh - env(safe-area-inset-top, 15px) - 155px);
+}
+
+#lesson-text {
+    font-size: 22px;
+    line-height: 1.8;
+    font-weight: 400;
+    color: var(--text-primary);
+    margin-bottom: 25px;
+    max-width: 600px;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#lesson-image-container {
+    width: 60%;
+    max-width: 350px;
+    opacity: 0;
+    transform: scale(0.95);
+    animation: fadeInScale 0.6s ease 0.2s forwards;
+}
+
+@keyframes fadeInScale {
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+#lesson-image {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    display: block;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Transition Effects */
+.fade-out {
+    animation: fadeOut 0.3s ease forwards;
+}
+
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 428px) {
+    #lesson-text {
+        font-size: 22px;
+        line-height: 1.8;
+        padding: 0 10px;
+        margin-bottom: 20px;
+    }
+
+    #lesson-image-container {
+        width: 65%;
+    }
+
+    #lesson-container {
+        padding: 0 25px calc(env(safe-area-inset-bottom, 20px) + 20px) 25px;
+    }
+}
+
+@media (max-width: 375px) {
+    #lesson-text {
+        font-size: 22px;
+        line-height: 1.8;
+    }
+
+    #lesson-image-container {
+        width: 80%;
+    }
+
+    #lesson-container {
+        padding: 0 20px calc(env(safe-area-inset-bottom, 20px) + 20px) 20px;
+    }
+}
+
+/* Landscape Mode */
+@media (orientation: landscape) and (max-height: 500px) {
+    #lesson-container {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 40px;
+    }
+
+    #lesson-text {
+        flex: 1;
+        margin-bottom: 0;
+        margin-right: 30px;
+        text-align: left;
+    }
+
+    #lesson-image-container {
+        width: 40%;
+        max-width: 300px;
+    }
+}
+
+/* Loading State */
+.loading {
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+/* iOS Safari specific fixes */
+@supports (-webkit-touch-callout: none) {
+    body {
+        height: -webkit-fill-available;
+    }
+}
