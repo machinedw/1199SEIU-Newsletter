@@ -230,7 +230,7 @@ if (document.readyState === 'loading') {
 // Register service worker
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/mindset-playbook/sw.js')
+        navigator.serviceWorker.register('/1199-newsletter-jan-2026/sw.js')
             .then(registration => {
                 console.log('ServiceWorker registered:', registration.scope);
             })
