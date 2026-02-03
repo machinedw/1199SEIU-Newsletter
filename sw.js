@@ -1,14 +1,14 @@
 // Service Worker for The Predator's Playbook
 // Enables offline functionality and faster loading
 
-const CACHE_NAME = 'predator-playbook-v1';
+const CACHE_NAME = '1199-newsletter-v1';
 const ASSETS_TO_CACHE = [
-    '/mindset-playbook/',
-    '/mindset-playbook/index.html',
-    '/mindset-playbook/css/style.css',
-    '/mindset-playbook/js/app.js',
-    '/mindset-playbook/js/content.js',
-    '/mindset-playbook/manifest.json'
+    '/1199-newsletter-jan-2026/',
+    '/1199-newsletter-jan-2026/index.html',
+    '/1199-newsletter-jan-2026/css/style.css',
+    '/1199-newsletter-jan-2026/js/app.js',
+    '/1199-newsletter-jan-2026/js/content.js',
+    '/1199-newsletter-jan-2026/manifest.json'
 ];
 
 // Install event - cache essential assets
